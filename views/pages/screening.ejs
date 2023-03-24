@@ -1,0 +1,287 @@
+<!doctype html>
+<html lang="id">
+  
+  <%- include('../partials/head.ejs') %>
+    <title>Screening</title>
+    <link href="/css/global.css" rel="stylesheet" />
+    <link href="/css/screening.css" rel="stylesheet" />
+  </head>
+
+  <body>
+    <%- include('../partials/navbar.ejs') %>
+    <main class="container">
+      
+      <div id="biodata">
+        <h1 class="text-center fw-bold my-5">Konsultasi</h1>
+        <h3 class="text-center">Biodata</h3>
+        <form class="mt-5">
+          <div class="row justify-content-center mb-3">
+            <div class="col-10 col-md-8">
+              <label for="nama" class="form-label fs-5">Nama Lengkap:</label>
+              <input type="text" class="form-control border border-0 border-bottom border-secondary shadow-none" id="nama" >
+              <div id="cekNama" class="invalid-feedback">
+                  Nama Belum Di Masukan
+              </div>
+            </div>
+          </div>
+          <div class="row justify-content-center mb-3">
+            <div class="col-10 col-md-8">
+              <label for="kelamin" class="form-label fs-5">Jenis Kelamin:</label>
+              <select class="form-select shadow-none" id="kelamin">
+                <option selected value="">Pilih Jenis Kelamin</option>
+                <option value="Laki - laki">Laki-laki</option>
+                <option value="Perempuan">Perempuan</option>
+              </select>
+              <div id="cekKelamin" class="invalid-feedback">
+                  Jenis Kelamin Belum Dipilih
+              </div>
+            </div>
+          </div>
+          <div class="row justify-content-center mb-3">
+            <div class="col-10 col-md-8">
+              <label for="umur" class="form-label fs-5">Umur:</label>
+              <input type="number" min=0 class="form-control border border-0 border-bottom border-secondary shadow-none" id="umur" >
+              <div id="cekUmur" class="invalid-feedback">
+                  Umur Belum Dimasukan
+              </div>
+            </div>
+          </div>
+          <div class="row justify-content-center mb-3">
+            <div class="col-10 col-md-8">
+              <label for="sekolah" class="form-label fs-5">Sekolah:</label>
+              <input type="text" class="form-control border border-0 border-bottom border-secondary shadow-none" id="sekolah" >
+            </div>
+          </div>
+          <div class="row justify-content-center mb-3">
+            <div class="col-10 col-md-8">
+              <label for="kelas" class="form-label fs-5">Kelas:</label>
+              <input type="text" class="form-control border border-0 border-bottom border-secondary shadow-none" id="kelas" >
+            </div>
+          </div>
+
+          <div class="d-grid col-2 mx-auto my-5">
+            <button type="button" class="btn btn-secondary btn-lg" onclick="biodata()">Lanjutkan</button>
+          </div>
+        </form>
+      </div> 
+
+      <div class="py-5" id="pertanyaan">
+          <h1 class="text-center my-5">Pertanyaan <span id="nomorPertanyaan"></span> dari 10</h1>
+          <p class="text-center fs-3" id="pertanyaanText"></p>
+          <div class="row row-cols-1 gap-2 row-cols-md-auto justify-content-center text-center">
+            <div class="col">
+              <input type="radio" class="btn-check" name="jawaban" id="1" autocomplete="off" value="1">
+              <label class="btn btn-outline-dark btn-lg" for="1">Tidak sama sekali</label>
+            </div>
+
+            <div class="col">
+              <input type="radio" class="btn-check" name="jawaban" id="2" autocomplete="off" value="2">
+              <label class="btn btn-outline-dark btn-lg" for="2">Sekali - sekali</label>
+            </div>
+
+            <div class="col">
+              <input type="radio" class="btn-check" name="jawaban" id="3" autocomplete="off" value="3">
+              <label class="btn btn-outline-dark btn-lg" for="3">Cukup Sering</label>
+            </div>
+
+            <div class="col">
+              <input type="radio" class="btn-check" name="jawaban" id="4" autocomplete="off" value="4">
+              <label class="btn btn-outline-dark btn-lg" for="4">Hampir Selalu</label>
+            </div>
+          </div>
+          <div class="d-flex gap-2 justify-content-between my-5">
+            <button class="btn btn-warning btn-lg" type="button" onclick="kembali()" >Kembali</button>
+            <button class="btn btn-success btn-lg" type="button" onclick="lanjut()" >Selanjutnya</button>
+          </div>
+      </div>
+
+      <div id="hasil">
+        <h1 class="text-center fw-bold border-bottom pb-3 mb-2 mt-5 border-secondary border-2">Hasil Analisis</h1>
+        <table class="table table-bordered border-dark my-4">
+          <thead>
+            <tr>
+              <th class="table-secondary border-dark" colspan="3">Riwayat Screening</th>
+            </tr>
+            <tr>
+              <th class="text-center" scope="col">No</th>
+              <th class="text-center" scope="col">Pertanyaan</th>
+              <th class="text-center" scope="col">Jawaban</th>
+            </tr>
+          </thead>
+          <tbody id="tableHasil">
+          </tbody>
+        </table>
+        <hr class="my-5" />
+        <table class="table table-bordered border-dark">
+          <thead>
+            <tr>
+              <th class="table-secondary border-dark" colspan="5">Biodata Konsultasi</th>
+            </tr>
+            <tr>
+              <th class="text-center" scope="col">Nama</th>
+              <th class="text-center" scope="col">Jenis Kelamin</th>
+              <th class="text-center" scope="col">Umur</th>
+              <th class="text-center" scope="col">Sekolah</th>
+              <th class="text-center" scope="col">Kelas</th>
+            </tr>
+          </thead>
+          <tbody id="tableBiodata">
+          </tbody>
+        </table>
+      </div>
+
+    </main>
+    <%- include('../partials/footer.ejs') %>
+    <%- include('../partials/scriptCdn.ejs') %>
+    <script type="text/javascript">
+      var nama = ""
+      var kelamin = ""
+      var umur = 0
+      var sekolah =""
+      var kelas = ""
+
+      $("#cekNama").hide();
+      $("#cekKelamin").hide();
+      $("#cekUmur").hide();
+      $("#pertanyaan").hide();
+      $("#hasil").hide();
+
+      var pertanyaan = [ 
+        "Tidak kenal lelah, atau aktivitas berlebihan",
+        "Mudah menjadi gembira, impulsive",
+        "Mengganggu anak lain",
+        "Gagal menyelesaikan kegiatan yang telah dimulai, selang waktu perhatiannya pendek",
+        "Menggerak - gerakan anggota badan atau kepala secara terus menerus",
+        "Perhatian kurang, mudah teralihkan",
+        "Permintaan harus segera dipenuhi, mudah menjadi frustasi",
+        "Sering dan mudah menangis",
+        "Suasana hatinya berubah dengan cepat dan drastis",
+        "Ledakan kekesalan, tingkah laku ekplosif dan tidak terduga",
+      ]
+      var posisi_pertanyaan = 0;
+      $('#pertanyaanText').text(pertanyaan[posisi_pertanyaan]);
+      $('#nomorPertanyaan').text(posisi_pertanyaan + 1);
+      var jawaban = [];
+
+      function biodata(){
+        nama = $("#nama").val()
+        kelamin = $("#kelamin").val()
+        umur =  $("#umur").val()
+        sekolah =  $("#sekolah").val()
+        kelas =  $("#kelas").val()
+
+        if(nama===""){
+          $("#cekNama").show();
+        } else{ $("#cekNama").hide(); }
+        if(kelamin===""){
+          $("#cekKelamin").show();
+        } else{ $("#cekKelamin").hide(); }
+        if(umur==0){
+          $("#cekUmur").show();
+        } else{ $("#cekUmur").hide(); }
+        
+        if ( nama != "" && kelamin != "" && umur!=0) {
+          $("#biodata").hide();
+          $("#pertanyaan").show();  
+        }
+      }
+
+      function konversiJawaban(jawabanTemp){
+        if (jawabanTemp == 1) {
+          return "Tidak sama sekali";
+        }
+        else if(jawabanTemp == 2){
+          return "Sekali - kali"
+        }
+        else if(jawabanTemp == 3){
+          return "Cukup sering"
+        }
+        else if(jawabanTemp == 4){
+          return "Hampir selalu"
+        }
+      }
+
+      function lanjut(){
+        jawaban[posisi_pertanyaan] = $('input[name="jawaban"]:checked').val();
+        $("input:radio[name='jawaban']").each(function(i) {
+          this.checked = false;
+        });
+        if (jawaban[posisi_pertanyaan] == undefined) {
+          Swal.fire({
+            icon: 'error',
+            title: 'Pertanyaan Belum Dijawab!',
+            text: 'Jawab dulu pertanyaan sebelum melanjutkan'
+          })
+        } 
+        else {
+          if (posisi_pertanyaan == 9) {
+            $(`#${jawaban[posisi_pertanyaan]}`).prop("checked", true);
+            $("#pertanyaan").hide();
+            for (var i = 0; i < 10; i++) {
+              tRow = $("<tr>");
+              tRow.append($('<td>', {
+                  'text':`${i+1}`,
+                  'class': "text-center",
+              }));
+              tRow.append($('<td>', {
+                  'text':`${pertanyaan[i]}`
+              }));
+              tRow.append($('<td>', {
+                  'text':konversiJawaban(jawaban[i]),
+                  'class': "text-center",
+              }));
+              $('#tableHasil').append(tRow);
+            }
+            tRowBiodata = $("<tr>");
+            tRowBiodata.append($('<td>', {
+                'text':nama,
+                'class': "text-center",
+            }));
+            tRowBiodata.append($('<td>', {
+                'text':kelamin,
+                'class': "text-center",
+            }));
+            tRowBiodata.append($('<td>', {
+                'text': umur,
+                'class': "text-center",
+            }));
+            tRowBiodata.append($('<td>', {
+                'text': sekolah,
+                'class': "text-center",
+            }));
+            tRowBiodata.append($('<td>', {
+                'text': kelas,
+                'class': "text-center",
+            }));
+            $('#tableBiodata').append(tRowBiodata);
+            $("#hasil").show();
+          } else {
+            posisi_pertanyaan += 1;
+            $('#nomorPertanyaan').text(posisi_pertanyaan + 1);
+
+            $('#pertanyaanText').text(pertanyaan[posisi_pertanyaan]);
+            $(`#${jawaban[posisi_pertanyaan]}`).prop("checked", true);
+            
+          }
+        }
+
+      }
+
+      function kembali(){
+        if (posisi_pertanyaan == 0) {
+          console.log("kembali ke biodata");
+        } else {
+          jawaban[posisi_pertanyaan] = $('input[name="jawaban"]:checked').val();
+          
+          posisi_pertanyaan -= 1;
+          $('#nomorPertanyaan').text(posisi_pertanyaan + 1);
+
+          $('#pertanyaanText').text(pertanyaan[posisi_pertanyaan]);
+          $(`#${jawaban[posisi_pertanyaan]}`).prop("checked", true);
+        }
+      }      
+
+    </script>
+  </body>
+
+</html>

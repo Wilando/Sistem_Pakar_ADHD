@@ -1,0 +1,25 @@
+#nama {
+	border-radius: 0px;
+}
+
+#kelamin {
+	border-radius: 0px;
+}
+
+#umur {
+	border-radius: 0px;
+}
+
+#sekolah {
+	border-radius: 0px;
+}
+
+#kelas {
+	border-radius: 0px;
+}
+
+hr {
+	height: 0px;
+    border: none;
+    border-top: 3px solid;
+}
