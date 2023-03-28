@@ -59,8 +59,8 @@
             </div>
           </div>
 
-          <div class="d-grid col-2 mx-auto my-5">
-            <button type="button" class="btn btn-secondary btn-lg" onclick="biodata()">Lanjutkan</button>
+          <div class="d-grid col-3 mx-auto my-5">
+            <button type="button" class="btn btn-success btn-lg" onclick="biodata()">Lanjutkan</button>
           </div>
         </form>
       </div> 
@@ -97,42 +97,52 @@
 
       <div id="hasil">
         <h1 class="text-center fw-bold border-bottom pb-3 mb-2 mt-5 border-secondary border-2">Hasil Analisis</h1>
-        <table class="table table-bordered border-dark my-4">
-          <thead>
-            <tr>
-              <th class="table-secondary border-dark" colspan="3">Riwayat Screening</th>
-            </tr>
-            <tr>
-              <th class="text-center" scope="col">No</th>
-              <th class="text-center" scope="col">Pertanyaan</th>
-              <th class="text-center" scope="col">Jawaban</th>
-            </tr>
-          </thead>
-          <tbody id="tableHasil">
-          </tbody>
-        </table>
-        <hr class="my-5" />
-        <table class="table table-bordered border-dark">
-          <thead>
-            <tr>
-              <th class="table-secondary border-dark text-center" colspan="5">Biodata Konsultasi</th>
-            </tr>
-            <tr>
-              <th class="text-center" scope="col">Nama</th>
-              <th class="text-center" scope="col">Jenis Kelamin</th>
-              <th class="text-center" scope="col">Umur</th>
-              <th class="text-center" scope="col">Sekolah</th>
-              <th class="text-center" scope="col">Kelas</th>
-            </tr>
-          </thead>
-          <tbody id="tableBiodata">
-          </tbody>
-        </table>
+        <div id="printHasil">
+          <table class="table table-bordered border-dark my-4">
+            <thead>
+              <tr>
+                <th class="table-secondary border-dark text-center" colspan="3">Riwayat Screening</th>
+              </tr>
+              <tr>
+                <th class="text-center" scope="col">No</th>
+                <th class="text-center" scope="col">Pertanyaan</th>
+                <th class="text-center" scope="col">Jawaban</th>
+              </tr>
+            </thead>
+            <tbody id="tableHasil">
+            </tbody>
+          </table>
+          <hr class="my-5" />
+          <table class="table table-bordered border-dark">
+            <thead>
+              <tr>
+                <th class="table-secondary border-dark text-center" colspan="5">Biodata Konsultasi</th>
+              </tr>
+              <tr>
+                <th class="text-center" scope="col">Nama</th>
+                <th class="text-center" scope="col">Jenis Kelamin</th>
+                <th class="text-center" scope="col">Umur</th>
+                <th class="text-center" scope="col">Sekolah</th>
+                <th class="text-center" scope="col">Kelas</th>
+              </tr>
+            </thead>
+            <tbody id="tableBiodata">
+            </tbody>
+          </table>
+          <hr class="my-5" />
+          <p class="fs-3 text-center" id="hasilScreening"></p>
+        </div>
+        
+        <div class="d-grid gap-2 d-md-flex justify-content-md-around my-5">
+          <button class="btn btn-success me-md-2 btn-lg" onclick="download_pdf()" type="button">Cetak Hasil</button>
+          <a class="btn btn-dark btn-lg" href="/">Home</a>
+        </div>
       </div>
 
     </main>
     <%- include('../partials/footer.ejs') %>
     <%- include('../partials/scriptCdn.ejs') %>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.js"></script>
     <script type="text/javascript">
       var nama = ""
       var kelamin = ""
@@ -254,6 +264,13 @@
                 'class': "text-center",
             }));
             $('#tableBiodata').append(tRowBiodata);
+            $.post("http://localhost:8000/cf_calculate",
+            {
+              jawaban: jawaban,
+            },
+            function(data,status){
+              $('#hasilScreening').append(`Anak anda berpotensi mengalami ADHD dengan presentase sebesar <b>${data}%</b>. Silahkan ke rumah sakit terdekat.`);
+            });
             $("#hasil").show();
           } else {
             posisi_pertanyaan += 1;
@@ -269,7 +286,8 @@
 
       function kembali(){
         if (posisi_pertanyaan == 0) {
-          console.log("kembali ke biodata");
+          $("#biodata").show();
+          $("#pertanyaan").hide();
         } else {
           jawaban[posisi_pertanyaan] = $('input[name="jawaban"]:checked').val();
           
@@ -279,6 +297,17 @@
           $('#pertanyaanText').text(pertanyaan[posisi_pertanyaan]);
           $(`#${jawaban[posisi_pertanyaan]}`).prop("checked", true);
         }
+      }
+
+      function download_pdf(){
+        var opt = {
+          margin:       1,
+          filename:     `${nama}_Hasil_Screening_ADHD.pdf`,
+          html2canvas:  { scale: 2 },
+        };
+
+        var makepdf = document.getElementById("printHasil");
+        html2pdf().set(opt).from(makepdf).save();
       }      
 
     </script>

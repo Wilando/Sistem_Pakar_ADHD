@@ -3,7 +3,7 @@ const { pages, cf } = require("../controllers");
 
 // pages
 router.get("/", pages.home);
-router.get("/artikel", pages.artikel);
+router.get("/artikel/:index", pages.artikel);
 router.get("/tentang", pages.tentang);
 router.get("/screening", pages.screening);
 

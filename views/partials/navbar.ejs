@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-md navbar-dark bg-navbar" aria-label="Fourth navbar example">
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
   <div class="container-fluid">
     <a class="navbar-brand fs-2" href="#">Logo</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
@@ -11,7 +11,7 @@
           <a id="home" class="nav-link fs-5" aria-current="page" href="/">Beranda</a>
         </li>
         <li class="nav-item ms-2">
-          <a id="artikel" class="nav-link fs-5" href="/artikel">Artikel</a>
+          <a id="artikel-nav" class="nav-link fs-5" href="/#artikel">Artikel</a>
         </li>
         <li class="nav-item ms-2">
           <a id="tentang" class="nav-link fs-5" href="/tentang">Tentang</a>
@@ -27,7 +27,7 @@
     $( "#home" ).addClass( "active" )
   }
   else if(currentPath === "/artikel"){
-    $( "#artikel" ).addClass( "active" )
+    $( "#artikel-nav" ).addClass( "active" )
   }
   else if(currentPath === "/tentang"){
     $( "#tentang" ).addClass( "active" )

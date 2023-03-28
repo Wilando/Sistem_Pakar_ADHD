@@ -5,12 +5,19 @@ if (process.env.NODE_ENV !== "production") {
 
 const base_url = process.env.BASE_URL;
 
+const daftar_artikel = require("../daftar_artikel");
+
 module.exports = {
   home: (req, res) => {
     return res.render("pages/home", { baseUrl: base_url });
   },
   artikel: (req, res) => {
-    return res.render("pages/artikel", { baseUrl: base_url });
+    return res.render(
+      "pages/artikel", 
+      { baseUrl: base_url, 
+        judul: daftar_artikel.judul[req.params.index - 1],
+        isi: daftar_artikel.isi[req.params.index - 1] 
+      });
   },
   tentang: (req, res) => {
     return res.render("pages/tentang", { baseUrl: base_url });
