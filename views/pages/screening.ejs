@@ -149,6 +149,7 @@
       var umur = 0
       var sekolah =""
       var kelas = ""
+      var jumlah = 0
 
       $("#cekNama").hide();
       $("#cekKelamin").hide();
@@ -242,6 +243,33 @@
               }));
               $('#tableHasil').append(tRow);
             }
+            
+            for(var i = 0; i < 10; i++){
+              if (jawaban[i] == 1) {
+                jumlah += 0
+              }
+              else if(jawaban[i] == 2){
+                jumlah += 1
+              }
+              else if(jawaban[i] == 3){
+                jumlah += 2
+              }
+              else if(jawaban[i] == 4){
+                jumlah += 3
+              }
+            }
+            trJumlah = $("<tr>");
+            trJumlah.append($('<td>', {
+              'text':"Hasil Conners",
+              'colspan':2,
+              'class': "text-center",
+            }));
+            trJumlah.append($('<td>', {
+                'text':jumlah,
+                'class': "text-center",
+            }));
+            $('#tableHasil').append(trJumlah);
+
             tRowBiodata = $("<tr>");
             tRowBiodata.append($('<td>', {
                 'text':nama,
@@ -269,7 +297,13 @@
               jawaban: jawaban,
             },
             function(data,status){
-              $('#hasilScreening').append(`Anak anda berpotensi mengalami ADHD dengan presentase sebesar <b>${data}%</b>. Silahkan ke rumah sakit terdekat.`);
+              if (jumlah <= 12) {
+                $('#hasilScreening').append(`Anak anda tidak berpotensi mengalami ADHD`);  
+              }
+              else{
+                $('#hasilScreening').append(`Anak anda berpotensi mengalami ADHD dengan presentase sebesar <b>${data}%</b>. Silahkan ke rumah sakit terdekat.`);
+              }
+              
             });
             $("#hasil").show();
           } else {
