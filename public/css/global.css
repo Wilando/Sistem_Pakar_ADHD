@@ -1,15 +1,20 @@
 /*footer*/
+html *
+{
+   font-family: Poppins !important;
+}
+
 .bg-footer {
-	background-color: #d9d9d9;
+	background-color: #477B99;
 }
 
 .bg-cp {
-	background-color: #838383;
+	background-color: #55A2CD;
 }
 
 /*navbar*/
 .bg-navbar {
-	background-color: #838383;
+	background-color: #55A2CD;
 }
 
 /*background*/
@@ -19,4 +24,17 @@
 
 .bg-abu-gelap {
 	background-color: #838383;
+}
+
+.tengah{
+	--panjang: 100%
+}
+
+.tengah-nav{
+	margin-left: auto;
+	margin-right: auto;
+	transform: translateX(-50%);;
+}
+.btn-color{
+	background-color:#477B99 ;
 }
