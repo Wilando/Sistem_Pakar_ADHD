@@ -11,10 +11,13 @@
     <main class="container">
       <h1 class="text-center fw-bold mt-5"><%= judul %></h1>
       <img class="img-fluid" src="/images/adhd.jpeg">
-      <p class="mb-5"><%= isi %></p>
+      <p class="mb-5" style="text-align: justify; text-justify: inter-word;" id="isi"><%= isi %></p>
     </main>
     <%- include('../partials/footer.ejs') %>
     <%- include('../partials/scriptCdn.ejs') %>
+    <script>
+      document.getElementById("isi").innerHTML = document.getElementById("isi").textContent;
+    </script>
   </body>
 
 </html>
