@@ -9,8 +9,8 @@
   <body>
     <%- include('../partials/navbar.ejs') %>
     <main class="container">
-      <h1 class="text-center fw-bold mt-5"><%= judul %></h1>
-      <img class="img-fluid" src="/images/adhd.jpeg">
+      <h1 class="text-center fw-bold mt-5 my-5"><%= judul %></h1>
+      <img class="img-fluid mx-auto d-block my-5" src="/images/<%=gambar%>">
       <p class="mb-5" style="text-align: justify; text-justify: inter-word;" id="isi"><%= isi %></p>
     </main>
     <%- include('../partials/footer.ejs') %>

@@ -154,9 +154,12 @@ const isi = [
      <h10 style="font-size:12px">Referensi:
      https://www.liputan6.com/disabilitas/read/5248311/4-tips-untuk-orang-tua-agar-anak-dengan-adhd-memiliki-motivasi-dan-fokus</h10>`
 ]
-
+const gambar = [
+     "art1.jpg","art2.jpg","art3.jpg"
+]
 
 module.exports = {
 	judul: judul,
-	isi: isi
+	isi: isi,
+     gambar: gambar
 }

@@ -5,16 +5,16 @@ html *
 }
 
 .bg-footer {
-	background-color: #477B99;
+	background-color: #53A8B6;
 }
 
 .bg-cp {
-	background-color: #55A2CD;
+	background-color: #79C2D0;
 }
 
 /*navbar*/
 .bg-navbar {
-	background-color: #55A2CD;
+	background-color: #53A8B6;
 }
 
 /*background*/
@@ -33,10 +33,14 @@ html *
 .tengah-nav{
 	margin-left: auto;
 	margin-right: auto;
-	transform: translateX(-50%);;
+	transform: translateX(-75%);;
 }
 .btn-color{
-	background-color:#477B99 ;
+	background-color:#79C2D0 ;
+}
+.txt_justify{
+	text-align: justify;
+	text-justify: inter-word;
 }
 
 /* .btn-outline{

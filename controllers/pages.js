@@ -16,7 +16,8 @@ module.exports = {
       "pages/artikel", 
       { baseUrl: base_url, 
         judul: daftar_artikel.judul[req.params.index - 1],
-        isi: daftar_artikel.isi[req.params.index - 1] 
+        isi: daftar_artikel.isi[req.params.index - 1],
+        gambar: daftar_artikel.gambar[req.params.index - 1] 
       });
   },
   tentang: (req, res) => {
